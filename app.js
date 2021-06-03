@@ -13,7 +13,7 @@ const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-ac
 // The following line must appear AFTER const app = express() and before your routes!
 app.use(bodyParser.urlencoded({ extended: true }), 
 methodOverride('_method'));
-
+app.use(express.static('public'));
 
 // set the templating engine -> handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main', 
@@ -27,11 +27,7 @@ mongoose.connect('mongodb+srv://meka_1904:987654321@cluster0.mvlw2.mongodb.net/t
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-
 const reviews = require('./controllers/reviews')(app);
-
-
-
 
 
 // define app route
