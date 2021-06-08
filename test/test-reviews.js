@@ -7,12 +7,7 @@ const Review = require('../models/review');
 chai.use(chaiHttp);
 
 describe('Reviews', ()  => {
-  after(() => {
-    Review.deleteMany({title: 'Super Sweet Review'}).exec((err, reviews) => {
-      console.log(reviews)
-      reviews.remove();
-    })
-  });
+
 
   // TEST INDEX
   it('should index ALL reviews on / GET', (done) => {
@@ -105,4 +100,11 @@ describe('Reviews', ()  => {
       });
     });
   });
+});
+
+after(() => {
+  Review.deleteMany({title: 'Super Sweet Review'}).exec((err, reviews) => {
+    console.log(reviews)
+    reviews.remove();
+  })
 });

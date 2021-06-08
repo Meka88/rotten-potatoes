@@ -2,11 +2,11 @@
 const express = require('express');
 const Handlebars = require('handlebars');
 const mongoose = require('mongoose');
-require('dotenv').config();
+//require('dotenv').config();
 const bodyParser = require('body-parser');
 const app = express();
 const methodOverride = require('method-override');
-
+require('dotenv').config({ path: `${__dirname}/.env`})
 // console.log("envs", process.env);
 
 // middleware
