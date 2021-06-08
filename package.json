@@ -11,11 +11,17 @@
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
     "body-parser": "^1.19.0",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
     "method-override": "^3.0.0",
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.11",
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "mocha": "^8.4.0"
   }
 }
