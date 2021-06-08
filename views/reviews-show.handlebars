@@ -9,6 +9,20 @@
     <!-- Delete button -->
     <p><form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
         <button type="submit">Delete</button>
-    </form></p>
+    </form>
+    </p>
+
+    <!--comment form-->
+    {{> comment-form}}
+
+    <hr>
+
+      {{#each comment}}
+       {{> comment}}
+      {{/each}}
+
+      
     </div>
+
 </div>
+

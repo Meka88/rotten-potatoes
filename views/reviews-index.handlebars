@@ -3,12 +3,12 @@
 <!--<a href='/reviews/new'>New Review</a><br>-->
 
 <div class="row">
-{{#each reviews}}
-    <div class="col-md-3">
-    <a href="/reviews/{{this._id}}">
-    <h2 style="color:aquamarine">{{this.title}}</a> | 
-    <i style="color:crimson">{{this.movieTitle}}</i></h2>
-    <small>{{this.description}}</small>
-    </div>
-{{/each}}
+    {{#each reviews}}
+        <div class="col-md-3">
+        <a href="/reviews/{{this._id}}">
+        <h2 style="color:aquamarine">{{this.title}}</a> | 
+        <i style="color:crimson">{{this.movieTitle}}</i></h2>
+        <small>{{this.description}}</small>
+        </div>
+    {{/each}}
 </div>
