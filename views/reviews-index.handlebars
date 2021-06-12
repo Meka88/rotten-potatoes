@@ -1,14 +1,15 @@
-<h1>All Reviews</h1>
+<h1 style="padding: 20px; color:rgb(83, 76, 124); text-align:center">All Reviews</h1>
 
 <!--<a href='/reviews/new'>New Review</a><br>-->
 
-<div class="row">
+<div class="row" style="padding: 15px;">
     {{#each reviews}}
         <div class="col-md-3">
-        <a href="/reviews/{{this._id}}">
-        <h2 style="color:aquamarine">{{this.title}}</a> | 
-        <i style="color:crimson">{{this.movieTitle}}</i></h2>
-        <small>{{this.description}}</small>
+        <a href="/reviews/{{this._id}}" style="text-decoration: none; color:rgb(168, 118, 118)">
+        <small>By: {{this.author.username}}</small>
+        <h2 style="color:rgb(21, 48, 38)">{{this.title}}</a> | 
+        <i style="color:rgb(131, 34, 53)">{{this.movieTitle}}</i></h2>
+        <small style="font-style: italic; color:gray">{{this.description}}</small>
         </div>
     {{/each}}
 </div>

@@ -1,12 +1,24 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="/" style="margin-left: 20px; font-size:35px; color:rgb(57, 124, 121); font-weight: bold; text-shadow: 2px 2px;">
         Rotten Potatoes
       </a>
     </div>
     <div class="pull-right">
-      <a href="/reviews/new" class="btn btn-default navbar-btn">New Review</a>
+      {{#if currentUser}}
+      {{!-- <p href="/" style="padding: 5px; color:rgb(160, 81, 160); text-decoration:none">Hello, {{currentUser.username}}</p> --}}
+      <a href="/reviews/new" class="btn btn-default navbar-btn" style="padding: 10px; color:rgb(88, 124, 170); font-size:larger; font-style: italic;">New Review</a>
+      {{/if}}
     </div>
-  </div>
+    <ul class="nav navbar-nav navbar-right">
+      {{#if currentUser}}
+      <a href="/" style="padding: 5px; color:rgb(160, 81, 160); text-decoration:none">Hello, {{currentUser.username}}</a>
+      <li><a href="/logout" class="btn btn-danger" style="background-color: rgb(245, 177, 188); border:none">Logout</a></li>
+      {{else}}
+      <li><a href="/login" class="btn btn-success" style="background-color: rgb(245, 177, 188); border:none">Login</a></li>
+      <li><a href="/sign-up" class="btn btn-info" style="background-color: rgb(245, 177, 188); border:none">Sign Up</a></li>
+      {{/if}}
+    </ul>
+  </div>  
 </nav>

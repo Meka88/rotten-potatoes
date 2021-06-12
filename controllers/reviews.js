@@ -1,12 +1,16 @@
 const Review = require('../models/review');
 const Comment = require('../models/comment');
-
+const User = require('../models/user')
+var dateFormat = require('dateformat');
+var now = new dateFormat();
 module.exports = function (app) {
     // get home route, all reviews
     app.get('/', (req, res) => {
-        Review.find().lean()
+        //retrieve current user  
+        const currentUser = req.user;
+        Review.find().lean().populate('author')
             .then(reviews => {
-                res.render('reviews-index', { reviews: reviews });
+                res.render('reviews-index', { reviews: reviews, currentUser });
             })
             .catch(err => {
                 console.log(err);
@@ -17,24 +21,49 @@ module.exports = function (app) {
         res.render('reviews-new', {title: "Post a Review"})
     })
     // CREATING A REVIEW
-    app.post('/reviews', (req, res) => {
-        Review.create(req.body)
-            .then((review) => {
-                console.log(review);
-                res.redirect(`/reviews/${review._id}`)
+    app.post('/reviews/new', (req, res) => {
+        if (req.user) {
+        const userId = req.user._id;
+        const review = new Review(req.body);
+        review.author = userId;
+    
+        review
+            .save()
+            .then(() => User.findById(userId))
+            .then((user) => {
+            user.reviews.unshift(review);
+            user.save();
+            // REDIRECT TO THE NEW review
+            return res.redirect(`/reviews/${review._id}`);
             })
-            .catch((err) => {
-                console.log(err.message);
-            })
-    })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } else {
+      return res.status(401); // UNAUTHORIZED
+    }
+    });
     // GETTING SINGLE REVIEW
     app.get('/reviews/:id', (req, res) => {
-        Review.findById(req.params.id)
+        const currentUser = req.user;
+
+        Review.findById(req.params.id).lean().populate('comments').populate('author')
             .then(review => {
+
+                //Check if user requesting website is review author
+                if (currentUser == null) {
+                    var theAuthor = false;
+                }
+                else if (currentUser.username === review.author.username){
+                    theAuthor = true;
+                }
+                var createdAtFormatted = dateFormat(review.createdAt, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+                var updatedAtFormatted = dateFormat(review.updatedAt, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+                
             Comment.find({ reviewId: req.params.id })
                 .then(comments => {
                     res.render('reviews-show', 
-                    { review: review, comments: comments })
+                    { review: review, comments: comments, currentUser, theAuthor, createdAtFormatted, updatedAtFormatted})
                 })
             }).catch((err) => {
                 console.log(err.message);

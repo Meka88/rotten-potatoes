@@ -1,23 +1,26 @@
-<a href="/">Back to Home</a>
+<a href="/" style="padding: 20px; font-size:larger; color:rgb(216, 16, 189); text-decoration:none">Back to Home</a>
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-    <h1>{{review.title}}</h1>
-    <h2>{{review.movieTitle}}</h2>
-    <p>{{review.description}}</p>
-
-    <p><a href="/reviews/{{review._id}}/edit">Edit</a></p>
+    <h1 style="padding: 5px; color:rgb(168, 118,118">{{review.title}}</h1>
+    <p class="text-muted">Posted: {{createdAtFormatted}}</p>
+    <p class="text-muted">Last Updated: {{updatedAtFormatted}}</p>
+    <small>By: {{review.author.username}}</small>
+    <h2 style="padding: 5px; color:rgb(131, 34, 53">{{review.movieTitle}}</h2>
+    <p style="font-style: italic; color:gray">{{review.description}}</p>
+    {{#if theAuthor}}
+    <p><a href="/reviews/{{review._id}}/edit" style="text-decoration: none; color:rgb(216, 16, 189)">Edit</a></p>
     <!-- Delete button -->
     <p><form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
-        <button type="submit">Delete</button>
+        <button type="submit" style="color:rgb(216, 16, 189)">Delete</button>
     </form>
     </p>
+    {{/if}}
 
-    <!--comment form-->
     {{> comment-form}}
 
     <hr>
 
-      {{#each comment}}
+      {{#each comments}}
        {{> comment}}
       {{/each}}
 
