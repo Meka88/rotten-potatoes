@@ -30,7 +30,7 @@ handlebars: allowInsecurePrototypeAccess(Handlebars)}))
 
 app.set('view engine', 'handlebars');
 <<<<<<< HEAD
-const mongoDB = 'mongodb+srv://meka_1904:987654321@cluster0.mvlw2.mongodb.net/test?retryWrites=true&w=majority';
+const mongoDB = 'mongodb+srv://USERNAME:PASSWORD@cluster0.mvlw2.mongodb.net/DATABASE_NAME?retryWrites=true&w=majority';
 // connects our server with MongoDB client
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 =======
